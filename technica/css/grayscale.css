@@ -20,26 +20,30 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 0 0 35px;
+  margin: 0 0 10px;
   text-transform: uppercase;
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 700;
   letter-spacing: 1px;
 }
+h1,
+h2,
+h3 {
+  font-size: 25px;
+}
 p {
-  margin: 0 0 25px;
-  font-size: 18px;
+  margin: 0 0 10px;
+  font-size: 16px;
   line-height: 1.5;
 }
 @media (min-width: 768px) {
   p {
-    margin: 0 0 35px;
-    font-size: 20px;
+    font-size: 16px;
     line-height: 1.6;
   }
 }
 a {
-  color: #42DCA3;
+  color: white;
   -webkit-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
@@ -48,6 +52,17 @@ a:hover,
 a:focus {
   text-decoration: none;
   color: #1d9b6c;
+}
+section {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.body-wrapper {
+  display: flex;
+  flex-direction: column;
 }
 .light {
   font-weight: 400;
@@ -140,6 +155,7 @@ a:focus {
 }
 .intro .intro-body .intro-text {
   font-size: 18px;
+  font-family: 'Inconsolata', monospace;
 }
 @media (min-width: 768px) {
   .intro {
@@ -222,27 +238,10 @@ a:focus {
 }
 .aboutUs-section {
   width: 100%;
-  padding: 50px 0;
-  color: white;
-  background: url(../img/aboutUs-bg.jpg) no-repeat center center scroll;
-  background-color: black;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
+  padding: 30px 0;
 }
-#map {
-  width: 100%;
-  height: 200px;
-  margin-top: 100px;
-}
-@media (min-width: 767px) {
-  .content-section {
-    padding-top: 250px;
-  }
-  .aboutUs-section {
-    padding: 100px 0;
-  }
+p.objectives-section {
+  margin-bottom: 90px;
 }
 .btn {
   text-transform: uppercase;
@@ -265,11 +264,14 @@ a:focus {
   color: black;
   background-color: #42DCA3;
 }
+h1.contain-scope {
+  margin-bottom: 70px;
+}
 ul.topics-list {
-  margin: 80px 0 40px;
+  margin: 20px 0 10px;
 }
 ul.topics-list li {
-  margin: 20px;
+  margin: 10px 15px;
 }
 ul.banner-social-buttons {
   margin-top: 0;
@@ -282,7 +284,7 @@ ul.banner-social-buttons {
 @media (max-width: 767px) {
   ul.banner-social-buttons li {
     display: block;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding: 0;
   }
   ul.banner-social-buttons li:last-child {
@@ -296,13 +298,11 @@ footer p {
   margin: 0;
 }
 ::-moz-selection {
-height: 100%;
   text-shadow: none;
   background: #fcfcfc;
   background: rgba(255, 255, 255, 0.2);
 }
 ::selection {
-	height: 100%;
   text-shadow: none;
   background: #fcfcfc;
   background: rgba(255, 255, 255, 0.2);
@@ -316,52 +316,3 @@ img::-moz-selection {
 body {
   webkit-tap-highlight-color: rgba(255, 255, 255, 0.2);
 }
-
-<!--slider-->
-.jk-slider{
-    width:75%;
-	min-height 848px;
-}
-/*          Hero Headers        */
-/********************************/
-.hero {
-	position: absolute;
-    top: 50%;
-    left: 50%;
-    z-index: 3;
-    color: #fff;
-    text-align: center;
-    text-transform: uppercase;
-    text-shadow: 1px 1px 0 rgba(0,0,0,.75);
-    /*  -webkit-transform: translate3d(-50%,-50%,0);
-         -moz-transform: translate3d(-50%,-50%,0);
-          -ms-transform: translate3d(-50%,-50%,0);
-           -o-transform: translate3d(-50%,-50%,0);
-              transform: translate3d(-50%,-50%,0);*/
-}
-.hero h1 {
-    font-size: 6em;    
-    font-weight: bold;
-    margin: 0;
-    padding: 0;
-}
-
-.fade-carousel .carousel-inner .item .hero {
-    opacity: 0;
-	interval: false;
-    /*-webkit-transition: 2s all ease-in-out .1s;
-       -moz-transition: 2s all ease-in-out .1s; 
-        -ms-transition: 2s all ease-in-out .1s; 
-         -o-transition: 2s all ease-in-out .1s; 
-            transition: 2s all ease-in-out .1s; */
-}
-.fade-carousel .carousel-inner .item.active .hero {
-    opacity: 1;
-	interval: false;
-    /*-webkit-transition: 2s all ease-in-out .1s;
-       -moz-transition: 2s all ease-in-out .1s; 
-        -ms-transition: 2s all ease-in-out .1s; 
-         -o-transition: 2s all ease-in-out .1s; 
-            transition: 2s all ease-in-out .1s;    */
-}
-
