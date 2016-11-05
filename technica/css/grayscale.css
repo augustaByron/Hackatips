@@ -273,6 +273,17 @@ ul.topics-list {
 ul.topics-list li {
   margin: 10px 15px;
 }
+#sell-product ul {
+  list-style-type: none;
+  padding: 0;
+}
+#carousel-contain-scope {
+  width: 1000px;
+}
+.teamwork-carousel-row {
+  width: 800px;
+  margin: auto;
+}
 ul.banner-social-buttons {
   margin-top: 0;
 }
