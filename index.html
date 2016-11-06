@@ -27,13 +27,336 @@
 	<!-- Theme CSS -->
 	<link href="technica/css/grayscale.min.css" rel="stylesheet">
 
+	<!-- Jquery -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+<script>
 
+$(function () {
+    $.getJSON('/technica/data.json', function (data) {
+
+Highcharts.theme = {
+    colors: ['#2b908f', '#90ee7e', '#f45b5b', '#7798BF', '#aaeeee', '#ff0066', '#eeaaee',
+        '#55BF3B', '#DF5353', '#7798BF', '#aaeeee'],
+    chart: {
+        backgroundColor: {
+            linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+            stops: [
+                [0, '#2a2a2b'],
+                [1, '#3e3e40']
+            ]
+        },
+        style: {
+            fontFamily: '\'Unica One\', sans-serif'
+        },
+        plotBorderColor: '#606063'
+    },
+    title: {
+        style: {
+            color: '#E0E0E3',
+            textTransform: 'uppercase',
+            fontSize: '20px'
+        }
+    },
+    subtitle: {
+        style: {
+            color: '#E0E0E3',
+            textTransform: 'uppercase'
+        }
+    },
+    xAxis: {
+        gridLineColor: '#707073',
+        labels: {
+            style: {
+                color: '#E0E0E3'
+            }
+        },
+        lineColor: '#707073',
+        minorGridLineColor: '#505053',
+        tickColor: '#707073',
+        title: {
+            style: {
+                color: '#A0A0A3'
+
+            }
+        }
+    },
+    yAxis: {
+        gridLineColor: '#707073',
+        labels: {
+            style: {
+                color: '#E0E0E3'
+            }
+        },
+        lineColor: '#707073',
+        minorGridLineColor: '#505053',
+        tickColor: '#707073',
+        tickWidth: 1,
+        title: {
+            style: {
+                color: '#A0A0A3'
+            }
+        }
+    },
+    tooltip: {
+        backgroundColor: 'rgba(0, 0, 0, 0.85)',
+        style: {
+            color: '#F0F0F0'
+        }
+    },
+    plotOptions: {
+        series: {
+            dataLabels: {
+                color: '#B0B0B3'
+            },
+            marker: {
+                lineColor: '#333'
+            }
+        },
+        boxplot: {
+            fillColor: '#505053'
+        },
+        candlestick: {
+            lineColor: 'white'
+        },
+        errorbar: {
+            color: 'white'
+        }
+    },
+    legend: {
+        itemStyle: {
+            color: '#E0E0E3'
+        },
+        itemHoverStyle: {
+            color: '#FFF'
+        },
+        itemHiddenStyle: {
+            color: '#606063'
+        }
+    },
+    credits: {
+        style: {
+            color: '#666'
+        }
+    },
+    labels: {
+        style: {
+            color: '#707073'
+        }
+    },
+
+    drilldown: {
+        activeAxisLabelStyle: {
+            color: '#F0F0F3'
+        },
+        activeDataLabelStyle: {
+            color: '#F0F0F3'
+        }
+    },
+
+    navigation: {
+        buttonOptions: {
+            symbolStroke: '#DDDDDD',
+            theme: {
+                fill: '#505053'
+            }
+        }
+    },
+
+    // scroll charts
+    rangeSelector: {
+        buttonTheme: {
+            fill: '#505053',
+            stroke: '#000000',
+            style: {
+                color: '#CCC'
+            },
+            states: {
+                hover: {
+                    fill: '#707073',
+                    stroke: '#000000',
+                    style: {
+                        color: 'white'
+                    }
+                },
+                select: {
+                    fill: '#000003',
+                    stroke: '#000000',
+                    style: {
+                        color: 'white'
+                    }
+                }
+            }
+        },
+        inputBoxBorderColor: '#505053',
+        inputStyle: {
+            backgroundColor: '#333',
+            color: 'silver'
+        },
+        labelStyle: {
+            color: 'silver'
+        }
+    },
+
+    navigator: {
+        handles: {
+            backgroundColor: '#666',
+            borderColor: '#AAA'
+        },
+        outlineColor: '#CCC',
+        maskFill: 'rgba(255,255,255,0.1)',
+        series: {
+            color: '#7798BF',
+            lineColor: '#A6C7ED'
+        },
+        xAxis: {
+            gridLineColor: '#505053'
+        }
+    },
+
+    scrollbar: {
+        barBackgroundColor: '#808083',
+        barBorderColor: '#808083',
+        buttonArrowColor: '#CCC',
+        buttonBackgroundColor: '#606063',
+        buttonBorderColor: '#606063',
+        rifleColor: '#FFF',
+        trackBackgroundColor: '#404043',
+        trackBorderColor: '#404043'
+    },
+
+    // special colors for some of the
+    legendBackgroundColor: 'rgba(0, 0, 0, 0.5)',
+    background2: '#505053',
+    dataLabelsColor: '#B0B0B3',
+    textColor: '#C0C0C0',
+    contrastTextColor: '#F0F0F3',
+    maskColor: 'rgba(255,255,255,0.3)'
+};
+
+// Apply the theme
+Highcharts.setOptions(Highcharts.theme);
+        /**
+         * Data parsed from http://www.bls.gov/lau/#tables
+         *
+         * 1. Go to http://www.bls.gov/lau/laucntycur14.txt (or similar, updated datasets)
+         * 2. In the Chrome Developer tools console, run this code:
+         * copy(JSON.stringify(document.body.innerHTML.split('\n').filter(function (s) { return s.indexOf('<PUT DATE HERE IN FORMAT e.g. Feb-14>') !== -1; }).map(function (row) { row = row.split('|'); return { code: 'us-' + row[3].trim().slice(-2).toLowerCase() + '-' + row[2].trim(), name: row[3].trim(), value: parseFloat(row[8]) }; })))
+         * 3. The data is now on your clipboard, paste it below
+         */
+
+        var countiesMap = Highcharts.geojson(Highcharts.maps['countries/us/us-all-all']),
+            lines = Highcharts.geojson(Highcharts.maps['countries/us/us-all-all'], 'mapline'),
+            options;
+
+        // Add state acronym for tooltip
+        Highcharts.each(countiesMap, function (mapPoint) {
+            mapPoint.name = mapPoint.name + ', ' + mapPoint.properties['hc-key'].substr(3, 2);
+        });
+
+        options = {
+            chart: {
+                borderWidth: 1,
+                marginRight: 50 // for the legend
+            },
+
+            title: {
+                text: 'Technica Attendance by County'
+            },
+
+            legend: {
+                title: {
+                    text: 'Technica<br>Attendance',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.textColor) || 'white'
+                    }
+                },
+                layout: 'vertical',
+                align: 'right',
+                floating: true,
+                valueDecimals: 0,
+                valueSuffix: '%',
+                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || 'rgba(10, 10, 10, 0.85)',
+                symbolRadius: 0,
+                symbolHeight: 14
+            },
+
+            mapNavigation: {
+                enabled: true
+            },
+
+            colorAxis: {
+                dataClasses: [{
+                    from: 0,
+                    to: 2,
+                    color: "#F1EEF6"
+                }, {
+                    from: 2,
+                    to: 4,
+                    color: "#D4B9DA"
+                }, {
+                    from: 4,
+                    to: 6,
+                    color: "#C994C7"
+                }, {
+                    from: 6,
+                    to: 8,
+                    color: "#DF65B0"
+                }, {
+                    from: 8,
+                    to: 10,
+                    color: "#DD1C77"
+                }, {
+                    from: 10,
+                    color: "#980043"
+                }]
+            },
+
+            plotOptions: {
+                mapline: {
+                    showInLegend: false,
+                    enableMouseTracking: false
+                }
+            },
+
+            series: [{
+                mapData: countiesMap,
+                data: data,
+                joinBy: ['hc-key', 'code'],
+                name: 'Attendance',
+                tooltip: {
+                    valueSuffix: '%'
+                },
+                borderWidth: 0.5,
+                states: {
+                    hover: {
+                        color: '#c1f2ff'
+                    }
+                }
+            }, {
+                type: 'mapline',
+                name: 'State borders',
+                data: [lines[0]],
+                color: 'black'
+            }, {
+                type: 'mapline',
+                name: 'Separator',
+                data: [lines[1]],
+                color: 'gray'
+            }]
+        };
+
+        // Instanciate the map
+        $('#container').highcharts('Map', options);
+    });
+});
+		</script>
     </head>
 
     <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
@@ -425,7 +748,9 @@
 		</div>
 	</section>
 </div>
-
+<div id="container" style="height: 520px; min-width: 310px; width: 800px; margin: 0 auto; text-align:center; line-height: 520px">
+    Downloading map...
+</div>
 				<!-- Footer -->
 				<!--<footer>
 					<div class="container text-center">
@@ -445,6 +770,13 @@
 
 				<!-- Theme JavaScript -->
 				<script src="technica/js/grayscale.min.js"></script>
+
+				<!-- High Charts -->
+				<script src="https://code.highcharts.com/maps/highmaps.js"></script>
+				<script src="https://code.highcharts.com/maps/modules/data.js"></script>
+				<script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+				<script src="https://code.highcharts.com/mapdata/countries/us/us-all-all.js"></script>
+
 
 			</body>
 
